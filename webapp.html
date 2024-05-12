@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text and Image Classifier</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f8f8;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        form {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        label {
+            font-weight: bold;
+        }
+        input[type="radio"] {
+            margin-right: 5px;
+        }
+        textarea, input[type="file"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        #solution {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <h1>Text and Image Classifier</h1>
+    <form id="inputForm">
+        <label for="inputType">Choose input type:</label><br>
+        <input type="radio" id="textOption" name="inputType" value="text" checked>
+        <label for="textOption">Text</label><br>
+        <input type="radio" id="imageOption" name="inputType" value="image">
+        <label for="imageOption">Image</label><br><br>
+        <div id="textInput" style="display: block;">
+            <label for="textInput">Enter text:</label><br>
+            <textarea id="textInput" name="textInput" rows="4" cols="50"></textarea><br>
+        </div>
+        <div id="imageInput" style="display: none;">
+            <label for="imageInput">Upload image:</label><br>
+            <input type="file" id="imageInput" name="imageInput"><br>
+        </div>
+        <button type="button" onclick="classifyInput()">Classify</button>
+    </form>
+
+    <div id="solution">
+        <!-- Solution will be displayed here -->
+    </div>
+
+    <script>
+        function classifyInput() {
+            var inputType = document.querySelector('input[name="inputType"]:checked').value;
+            var input;
+            if (inputType === 'text') {
+                input = document.getElementById('textInput').value;
+                // Here you can perform classification on text input
+                // For demonstration purposes, I'll just display it
+                displaySolution('Text input classified as: ' + input);
+            } else {
+                input = document.getElementById('imageInput').files[0];
+                // Here you can perform classification on image input
+                // For demonstration purposes, I'll just display it
+                displaySolution('Image input classified as: ' + input.name);
+            }
+        }
+
+        function displaySolution(solution) {
+            document.getElementById('solution').innerHTML = solution;
+        }
+
+        // Show/hide text or image input based on user selection
+        document.querySelectorAll('input[name="inputType"]').forEach((input) => {
+            input.addEventListener('change', function() {
+                if (this.value === 'text') {
+                    document.getElementById('textInput').style.display = 'block';
+                    document.getElementById('imageInput').style.display = 'none';
+                } else {
+                    document.getElementById('textInput').style.display = 'none';
+                    document.getElementById('imageInput').style.display = 'block';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
